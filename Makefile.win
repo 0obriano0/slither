@@ -4,8 +4,8 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = main.o set_cursor.o windows_Console.o
-LINKOBJ  = main.o set_cursor.o windows_Console.o
+OBJ      = main.o set_cursor.o windows_Console.o UI.o
+LINKOBJ  = main.o set_cursor.o windows_Console.o UI.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include"
@@ -33,3 +33,6 @@ set_cursor.o: set_cursor.cpp
 
 windows_Console.o: windows_Console.cpp
 	$(CPP) -c windows_Console.cpp -o windows_Console.o $(CXXFLAGS)
+
+UI.o: UI.cpp
+	$(CPP) -c UI.cpp -o UI.o $(CXXFLAGS)

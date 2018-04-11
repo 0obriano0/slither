@@ -5,5 +5,5 @@ private:
 protected:
 	
 public:
-	
+	void base();
 };

@@ -1,20 +1,38 @@
 #include "set_cursor.h"
 #include <conio.h>
 #include <stdio.h>
-#include <windows.h>
 
-void set_cursor::gotoxy(int x, int y) /* Thanks to 
-http://stackoverflow.com/questions/7955145/which-header-file-i-need-to-include-to-use-gotoxy-function
-*/
+// =============================================
+// 函式： gotoxy
+// 說明： 移動游標至指定位置
+// ============================================
+void set_cursor::gotoxy(int x, int  y)
 {
-  static HANDLE h = NULL;
-  if(!h)
-    h = GetStdHandle(STD_OUTPUT_HANDLE);
-  COORD c = { x, y }; // I am getting a little warning here :
+        COORD point;
+        point.X = x, point.Y = y;
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), point);
+}
 
-/*
-narrowing conversion of 'y' from 'int' to 'SHORT {aka short int}' 
-inside { } [-Wnarrowing]  Report Card.cpp /Working    line 13 C/C++ Problem
-*/
-  SetConsoleCursorPosition(h,c);
+// =============================================
+// 函式： getxy
+// 說明： 取得目前游標位置
+// ============================================
+void set_cursor::getxy(int &x, int &y)
+{
+        CONSOLE_SCREEN_BUFFER_INFO csbi;
+        GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+        x = csbi.dwCursorPosition.X;
+        y = csbi.dwCursorPosition.Y;
+}
+
+// ============================================
+// 函式： SetCursorVisible, 設定游標顯示比例
+// 說明： 其實就是設定游標多肥大,百分比 1~100
+// ===========================================
+void set_cursor::SetCursorVisible(BOOL Visible, DWORD Size)
+{
+        CONSOLE_CURSOR_INFO cci;
+        cci.bVisible = Visible; // 是否可視
+        cci.dwSize = Size; // 設定大小,1~100
+        SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cci);
 }
