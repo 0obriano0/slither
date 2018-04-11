@@ -1,4 +1,4 @@
- // 參考網站 
+ // 參考網站 http://www.cplusplus.com/forum/beginner/106119/
 #include<iostream>
 #include<conio.h>
 #include<stdio.h>
