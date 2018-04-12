@@ -50,21 +50,36 @@ void UI::GameMenu(){
 				      " | |_| | (_| | | | | | |  __/ |  | |  __/ | | | |_| |",
 				      "  \\____|\\__,_|_| |_| |_|\\___|_|  |_|\\___|_| |_|\\__,_|",
 					  "                                                     "};
-				  
+	int num2 = 7;
+	char st2[7][77]={	"       ###     ##    ##    ###                                             ",
+				  		" ####   ##           ##     ##                    ###                      ",
+				  		"##  #   ##    ###   #####   ####   ###  ## ###   ## ##  ###   #####   ###  ",
+                  		"####    ##     ##    ##     ## ## ## ##  ### #   ##    ## ##   ##### ## ## ",
+                  		"  ###   ##     ##    ##     ## ## #####  ##      #####  ####   # # # ##### ",
+                  		"#  ##   ##     ##    ## ##  ## ## ##     ##      ## ## ## ##   # # # ##    ",
+                  		"####  ###### ######   ###   ## ##  #### ####      #### ######  # # #  #### "};
 	set_cursor sc;
 	
 	int w=windows_width-6; //設定屏幕寬度
 	int h=windows_height-2; //設定屏幕長度
 	int L= strlen(st1[0]); //取得文字長度
+	int L2= strlen(st2[0]); //取得文字長度
 	int mode_L1 = strlen(mode1);
 	int mode_L2 = strlen(mode2);
 	SetColor(1,7);
+	
 	for(int loopnum1 = 0; loopnum1 < num1 ; loopnum1++){
 		sc.gotoxy(5+((w-L)/2),2+(h-1-num1-2)/2+loopnum1); //算出文字位子 等於 （螢幕長度-字串長度）/2 
 		std::cout << st1[loopnum1]; //輸出文字 
 	}
 	
+	SetColor(7,0);
+	for(int loopnum1 = 0; loopnum1 < num2 ; loopnum1++){
+		sc.gotoxy(5+((w-L2)/2),2+(h-1-num1-2)/2+loopnum1-num2-1); //算出文字位子 等於 （螢幕長度-字串長度）/2 
+		std::cout << st2[loopnum1]; //輸出文字 
+	}
 	
+	SetColor(1,7);
 	mode1_left = 5+((w-mode_L1)/2);
 	mode1_height = 2+(h-1-num1-3)/2+num1+2;
 	sc.gotoxy(mode1_left-3,mode1_height); //算出文字位子 等於 （螢幕長度-字串長度）/2
