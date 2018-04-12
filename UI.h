@@ -8,6 +8,10 @@ private:
 protected:
 	
 public:
+	int mode1_left;
+	int mode1_height;
+	int mode2_left;
+	int mode2_height;
 	void base();
 	void GameMenu();
 };

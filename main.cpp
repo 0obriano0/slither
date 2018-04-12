@@ -16,6 +16,32 @@ int main(int argc, char** argv) {
 	UI.GameMenu();
 	sc.SetCursorVisible(false,1); 
 	win_c._SetConsoleTitle(" ( ‧ω‧`)");
+	
+	int key1,key2;
+	while(1){
+		if (!kbhit())
+			key1= getch();
+			
+		if (key1 == 0 || key1==224){
+			key2 = getch();
+			switch(key2){
+				case 72:
+					sc.gotoxy(UI.mode1_left-3,UI.mode1_height); //算出文字位子 等於 （螢幕長度-字串長度）/2
+					std::cout << ">> ";
+					sc.gotoxy(UI.mode2_left-3,UI.mode2_height); //算出文字位子 等於 （螢幕長度-字串長度）/2
+					std::cout << "   ";
+				break;
+				case 80:
+					sc.gotoxy(UI.mode1_left-3,UI.mode1_height); //算出文字位子 等於 （螢幕長度-字串長度）/2
+					std::cout << "   ";
+					sc.gotoxy(UI.mode2_left-3,UI.mode2_height); //算出文字位子 等於 （螢幕長度-字串長度）/2
+					std::cout << ">> ";
+				break;
+			}
+		}else{
+		}
+	}
+	
 	Sleep(1000000);
 	return 0;
 }

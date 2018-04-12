@@ -5,6 +5,10 @@
 
 int windows_width;
 int windows_height;
+int mode1_left;
+int mode1_height;
+int mode2_left;
+int mode2_height;
 
 void UI::SetColor(unsigned short ForeColor,unsigned short BackGroundColor){
 	HANDLE hCon=GetStdHandle(STD_OUTPUT_HANDLE);
@@ -60,12 +64,18 @@ void UI::GameMenu(){
 		std::cout << st1[loopnum1]; //輸出文字 
 	}
 	
-	SetColor(4,7);
 	
-	sc.gotoxy(5+((w-mode_L1)/2),2+(h-1-num1-3)/2+num1+2); //算出文字位子 等於 （螢幕長度-字串長度）/2 
+	mode1_left = 5+((w-mode_L1)/2);
+	mode1_height = 2+(h-1-num1-3)/2+num1+2;
+	sc.gotoxy(mode1_left-3,mode1_height); //算出文字位子 等於 （螢幕長度-字串長度）/2
+	SetColor(7,0);
+	std::cout << ">> ";
+	SetColor(4,7);
 	std::cout << mode1; //輸出文字
 	
-	sc.gotoxy(5+((w-mode_L2)/2),2+(h-1-num1-3)/2+num1+4); //算出文字位子 等於 （螢幕長度-字串長度）/2 
+	mode2_left = 5+((w-mode_L2)/2);
+	mode2_height = 2+(h-1-num1-3)/2+num1+4;
+	sc.gotoxy(mode2_left,mode2_height); //算出文字位子 等於 （螢幕長度-字串長度）/2 
 	std::cout << mode2; //輸出文字
 	
 	SetColor(7,0);
