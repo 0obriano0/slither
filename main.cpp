@@ -13,8 +13,9 @@ int main(int argc, char** argv) {
 	windows_Console win_c;
 	UI UI;
 	UI.base();
+	UI.GameMenu();
+	sc.SetCursorVisible(false,1); 
 	win_c._SetConsoleTitle(" ( ¡E£s¡E`)");
-	cout << endl;
-
+	Sleep(1000000);
 	return 0;
 }
