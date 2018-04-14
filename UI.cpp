@@ -5,6 +5,8 @@
 
 int windows_width;
 int windows_height;
+int form_width;
+int form_height;
 int mode1_left;
 int mode1_height;
 int mode2_left;
@@ -17,7 +19,8 @@ void UI::SetColor(unsigned short ForeColor,unsigned short BackGroundColor){
 
 void UI::base(){
 	int w = 114,h = 30,spaceh = 1;
-	
+	form_width = w;
+	form_height = h;
 	set_cursor sc;
 	sc.gotoxy(3,spaceh);
 	for(int loopNum1 = 0; loopNum1 <= w/2; loopNum1++){

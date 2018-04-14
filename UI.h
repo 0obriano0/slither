@@ -8,6 +8,8 @@ private:
 protected:
 	
 public:
+	int form_width;
+	int form_height;
 	int mode1_left;
 	int mode1_height;
 	int mode2_left;
