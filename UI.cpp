@@ -3,24 +3,18 @@
 #include "set_cursor.h"
 #include "windows_Console.h"
 
-int windows_width;
-int windows_height;
-int form_width;
-int form_height;
-int mode1_left;
-int mode1_height;
-int mode2_left;
-int mode2_height;
-
 void UI::SetColor(unsigned short ForeColor,unsigned short BackGroundColor){
 	HANDLE hCon=GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hCon,(ForeColor%16)|(BackGroundColor%16*16));
 }
 
 void UI::base(){
-	int w = 114,h = 30,spaceh = 1;
+	int w = 112,h = 30,spaceh = 1;
 	form_width = w;
 	form_height = h;
+	form_top = spaceh+1;
+	form_left = 5;
+	
 	set_cursor sc;
 	sc.gotoxy(3,spaceh);
 	for(int loopNum1 = 0; loopNum1 <= w/2; loopNum1++){
@@ -40,12 +34,12 @@ void UI::base(){
 	windows_Console win;
 	windows_width = w+6;
 	windows_height = h+spaceh+2;
-	win.SetConsoleSize(w+6,h+spaceh+2);
+	win.SetConsoleSize(w+8,h+spaceh+2);
 }
 
 void UI::GameMenu(){
-	char mode1[]="### 家Α  ###";
-	char mode2[]="### 家Α  ###";
+	char mode1[]="### 秨﹍笴栏 ###";
+	char mode2[]="### 代刚跋办 ###";
 	int num1 = 6;		 
 	char st1[6][55]={ "   ____                      __  __                  ",
 				      "  / ___| __ _ _ __ ___   ___|  \\/  | ___ _ __  _   _ ",

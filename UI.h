@@ -10,6 +10,8 @@ protected:
 public:
 	int form_width;
 	int form_height;
+	int form_top;
+	int form_left;
 	int mode1_left;
 	int mode1_height;
 	int mode2_left;
