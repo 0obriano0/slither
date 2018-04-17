@@ -89,7 +89,7 @@ void game_system::game_start_function(){
 	char snake[] = "          ";
 	snake_lenght = strlen(snake);
 	sc.gotoxy(game_form_left+(game_form_width-snake_lenght)/2,game_form_top+(game_form_height-1)/2); //算出文字位子 等於 （螢幕長度-字串長度）/2
-	UI.SetColor(7,7);
+	UI.SetColor(2,2);
 	printf("%s",snake);
 	UI.SetColor(7,0);
 	for(int loopnum1 = 0; loopnum1 < snake_lenght; loopnum1++){
@@ -123,7 +123,7 @@ void game_system::game_start_function(){
 		}
 		
 		sc.gotoxy(snake_data[2][0]+2*snake_set_left,snake_data[2][1]+snake_set_top);
-		UI.SetColor(7,7);
+		UI.SetColor(2,2);
 		printf("  ");
 		UI.SetColor(7,0);
 		
