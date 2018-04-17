@@ -4,10 +4,10 @@ class UI
 private:
 	int windows_width;
 	int windows_height;
-	void SetColor(unsigned short ForeColor,unsigned short BackGroundColor);
 protected:
 	
 public:
+	void SetColor(unsigned short ForeColor,unsigned short BackGroundColor);
 	int form_width;
 	int form_height;
 	int form_top;
