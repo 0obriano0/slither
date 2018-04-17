@@ -53,6 +53,10 @@ int main(int argc, char** argv) {
 		if (!kbhit())
 			key1= getch();
 			
+		if(gs.getgame_over()){
+			gs.setgame_over(false);
+		}
+			
 		if (key1 == 0 || key1==224){
 			key2 = getch();
 			switch(key2){
@@ -63,10 +67,7 @@ int main(int argc, char** argv) {
 						sc.gotoxy(UI.mode2_left-3,UI.mode2_height);
 						std::cout << "   ";
 						gamemode = 1;
-					}else if(gs.getgame_start() && !gs.getgame_test() && gs.getsnake_control() != game_control_bottom){
-						while(gs.getsetting_snake_control()){
-								Sleep(5);
-						}
+					}else if(gs.getgame_start() && !gs.getgame_test() && gs.getsnake_control() != game_control_bottom && !gs.getsetting_snake_control()){
 						gs.setsnake_control(game_control_top);
 					}
 					break;
@@ -77,26 +78,17 @@ int main(int argc, char** argv) {
 						sc.gotoxy(UI.mode2_left-3,UI.mode2_height);
 						std::cout << ">> ";
 						gamemode = 2;	
-					}else if(gs.getgame_start() && !gs.getgame_test() && gs.getsnake_control() != game_control_top){
-						while(gs.getsetting_snake_control()){
-								Sleep(5);
-						}
+					}else if(gs.getgame_start() && !gs.getgame_test() && gs.getsnake_control() != game_control_top && !gs.getsetting_snake_control()){
 						gs.setsnake_control(game_control_bottom);
 					}
 					break;
 				case 75:
-					if(gs.getgame_start() && !gs.getgame_test() && gs.getsnake_control() != game_control_right){
-						while(gs.getsetting_snake_control()){
-								Sleep(5);
-						}
+					if(gs.getgame_start() && !gs.getgame_test() && gs.getsnake_control() != game_control_right && !gs.getsetting_snake_control()){
 						gs.setsnake_control(game_control_left);
 					}
 					break;
 				case 77:
-					if(gs.getgame_start() && !gs.getgame_test() && gs.getsnake_control() != game_control_left){
-						while(gs.getsetting_snake_control()){
-								Sleep(5);
-						}
+					if(gs.getgame_start() && !gs.getgame_test() && gs.getsnake_control() != game_control_left && !gs.getsetting_snake_control()){
 						gs.setsnake_control(game_control_right);
 					}
 					break;
@@ -108,6 +100,7 @@ int main(int argc, char** argv) {
 						if(gamemode == 1){
 							gs.setsnake_control(game_control_left);
 							_beginthread(get_start, 0,&gs);
+							gamemode = 1;
 						}else if(gamemode == 2){
 							gs.test();
 						}

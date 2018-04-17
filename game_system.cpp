@@ -9,6 +9,7 @@ int game_system::getsnake_control(){
 }
 
 void game_system::setsnake_control(int snake_control){
+	setting_snake_control = true;
 	this->snake_control = snake_control;
 	snake_set_top = 0;
 	snake_set_left = 0;
@@ -30,6 +31,14 @@ void game_system::setsnake_control(int snake_control){
 
 bool game_system::getgame_start(){
 	return game_start;
+}
+
+void game_system::setgame_over(bool game_over){
+	this->game_over = game_over;
+}
+
+bool game_system::getgame_over(){
+	return game_over;
 }
 
 void game_system::setgame_test(bool game_test){
@@ -90,7 +99,23 @@ void game_system::game_start_function(){
 	
 	//開始遊戲區域 
 	while(1){
-		sc.gotoxy(snake_data[snake_lenght-1][0]-1,snake_data[snake_lenght-1][1]);
+		setting_snake_control = true;
+		
+		if(snake_control == 1){
+			if(snake_data[0][1] == game_form_top)
+				break;
+		}else if(snake_control == 2){
+			if(snake_data[0][1] == game_form_top+game_form_height-1)
+				break;
+		}else if(snake_control == 3){
+			if(snake_data[0][0] == game_form_left)
+				break;
+		}else if(snake_control == 4){
+			if(snake_data[1][0] == game_form_left+game_form_width-1)
+				break;
+		}
+	
+		sc.gotoxy(snake_data[snake_lenght-2][0],snake_data[snake_lenght-2][1]);
 		printf("  ");
 		for(int loopnum2 = snake_lenght-1; loopnum2 >= 2;loopnum2--){
 			snake_data[loopnum2][0] = snake_data[loopnum2-2][0];
@@ -101,13 +126,33 @@ void game_system::game_start_function(){
 		UI.SetColor(7,7);
 		printf("  ");
 		UI.SetColor(7,0);
-		setting_snake_control = true;
+		
 		for(int loopnum3 = 0; loopnum3 < 2;loopnum3++){
 			snake_data[loopnum3][0] = snake_data[2][0]+((snake_set_left == 1)?2+loopnum3:2-loopnum3)*snake_set_left+abs(snake_set_top)*loopnum3;
 			snake_data[loopnum3][1] = snake_data[2][1]+snake_set_top;
 		}
+		
 		setting_snake_control = false;
 		Sleep(500);
 	}
+	
+	char str1[] = "    GAME OVER!!    ";
+	char str2[] = "    請按 任意鍵 來首頁    ";
+	int L1 = strlen(str1);
+	int L2 = strlen(str2);
+	sc.gotoxy(game_form_left+(game_form_width-L1)/2,game_form_top+(game_form_height-1+2)/2); //算出文字位子 等於 （螢幕長度-字串長度）/2
+	printf("%s",str1);
+	sc.gotoxy(game_form_left+(game_form_width-L2)/2,game_form_top+(game_form_height-1+2)/2+1); //算出文字位子 等於 （螢幕長度-字串長度）/2
+	printf("%s",str2); 
+	
+	game_over = true;
+	while(game_over){
+		Sleep(20);
+	}
+	
+	win_c.Clr();
+	UI.base();
+	UI.GameMenu();
+	
 	game_start = false;
 }
