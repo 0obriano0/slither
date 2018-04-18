@@ -9,6 +9,7 @@ private:
 	bool game_test;
 	bool game_over;
 	bool setting_snake_control;
+	bool windows_snake_body[150][150];
 	int snake_data[100][2];
 	int snake_lenght;
 	int snake_control;

@@ -61,6 +61,9 @@ void game_system::game_system_seting(int game_form_width, int game_form_height, 
 	game_start = false;
 	game_test = false;
 	setting_snake_control = false;
+	for(int loopnum1 = 0; loopnum1 < 150; loopnum1++)
+		for(int loopnum2 = 0; loopnum2 < 150; loopnum2++)
+			windows_snake_body[loopnum1][loopnum2] = false;
 }
 
 void game_system::test(){
@@ -80,6 +83,9 @@ void game_system::test(){
 
 void game_system::game_start_function(){
 	//遊戲設定 
+	for(int loopnum1 = 0; loopnum1 < 150; loopnum1++)
+		for(int loopnum2 = 0; loopnum2 < 150; loopnum2++)
+			windows_snake_body[loopnum1][loopnum2] = false;
 	game_start = true;
 	windows_Console win_c;
 	win_c.Clr();
@@ -95,6 +101,7 @@ void game_system::game_start_function(){
 	for(int loopnum1 = 0; loopnum1 < snake_lenght; loopnum1++){
 		snake_data[loopnum1][0] = game_form_left+(game_form_width-snake_lenght)/2+loopnum1;
 		snake_data[loopnum1][1] = game_form_top+(game_form_height-1)/2;
+		windows_snake_body[snake_data[loopnum1][0]][snake_data[loopnum1][1]] = true;
 	}
 	
 	//開始遊戲區域 
@@ -102,20 +109,22 @@ void game_system::game_start_function(){
 		setting_snake_control = true;
 		
 		if(snake_control == 1){
-			if(snake_data[0][1] == game_form_top)
+			if(snake_data[0][1] == game_form_top || windows_snake_body[snake_data[0][0]][snake_data[0][1]-1])
 				break;
 		}else if(snake_control == 2){
-			if(snake_data[0][1] == game_form_top+game_form_height-1)
+			if(snake_data[0][1] == game_form_top+game_form_height-1 || windows_snake_body[snake_data[0][0]][snake_data[0][1]+1])
 				break;
 		}else if(snake_control == 3){
-			if(snake_data[0][0] == game_form_left)
+			if(snake_data[0][0] == game_form_left || windows_snake_body[snake_data[0][0]-1][snake_data[0][1]])
 				break;
 		}else if(snake_control == 4){
-			if(snake_data[1][0] == game_form_left+game_form_width-1)
+			if(snake_data[1][0] == game_form_left+game_form_width-1 || windows_snake_body[snake_data[1][0]+1][snake_data[1][1]])
 				break;
 		}
 	
 		sc.gotoxy(snake_data[snake_lenght-2][0],snake_data[snake_lenght-2][1]);
+		windows_snake_body[snake_data[snake_lenght-1][0]][snake_data[snake_lenght-1][1]] = false;
+		windows_snake_body[snake_data[snake_lenght-2][0]][snake_data[snake_lenght-2][1]] = false;
 		printf("  ");
 		for(int loopnum2 = snake_lenght-1; loopnum2 >= 2;loopnum2--){
 			snake_data[loopnum2][0] = snake_data[loopnum2-2][0];
@@ -130,6 +139,7 @@ void game_system::game_start_function(){
 		for(int loopnum3 = 0; loopnum3 < 2;loopnum3++){
 			snake_data[loopnum3][0] = snake_data[2][0]+((snake_set_left == 1)?2+loopnum3:2-loopnum3)*snake_set_left+abs(snake_set_top)*loopnum3;
 			snake_data[loopnum3][1] = snake_data[2][1]+snake_set_top;
+			windows_snake_body[snake_data[loopnum3][0]][snake_data[loopnum3][1]] = true;
 		}
 		
 		setting_snake_control = false;
