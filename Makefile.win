@@ -9,7 +9,7 @@ LINKOBJ  = main.o set_cursor.o windows_Console.o UI.o game_system.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -lwinmm -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include"
-BIN      = form.exe
+BIN      = slither.exe
 CXXFLAGS = $(CXXINCS) -std=c99 -fpermissive -g3
 CFLAGS   = $(INCS) -std=c99 -fpermissive -g3
 RM       = rm -f
