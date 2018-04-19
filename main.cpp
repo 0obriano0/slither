@@ -11,6 +11,9 @@
 #define game_control_left 3
 #define game_control_right 4
 
+#include "mmsystem.h"
+#pragma comment(lib,"winmm.lib")
+
 using namespace std;
 
 int pause = 0;
@@ -29,6 +32,10 @@ void reset_gamemenu(int *num){
 }
 
 int main(int argc, char** argv) {
+	
+	char music_buffer[255];
+	mciSendString(("open Jay_Jay.mp3 alias MUSIC"),music_buffer,sizeof(music_buffer),0);
+	mciSendString("play MUSIC repeat",NULL,0,0); 
 	
 	set_cursor sc;
 	windows_Console win_c;
@@ -54,6 +61,7 @@ int main(int argc, char** argv) {
 			key1= getch();
 			
 		if(gs.getgame_over()){
+			mciSendString("play MUSIC repeat",NULL,0,0);
 			gs.setgame_over(false);
 		}
 			
@@ -101,6 +109,7 @@ int main(int argc, char** argv) {
 							gs.setsnake_control(game_control_left);
 							_beginthread(get_start, 0,&gs);
 							gamemode = 1;
+							mciSendString("stop MUSIC",NULL,0,0);
 						}else if(gamemode == 2){
 							gs.test();
 						}
