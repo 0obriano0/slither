@@ -100,6 +100,9 @@ int main(int argc, char** argv) {
 						gs.setsnake_control(game_control_right);
 					}
 					break;
+				case 107:
+					exit(0);
+					break;
 			}
 		}else{
 			switch(key1){
