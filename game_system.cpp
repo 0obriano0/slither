@@ -4,6 +4,7 @@
 #include "UI.h"
 #include <stdio.h>
 #include <time.h>
+#include <math.h> 
 
 int game_system::getsnake_control(){
 	return snake_control;
@@ -87,7 +88,7 @@ void game_system::game_start_function(){
 	for(int loopnum1 = 0; loopnum1 < 150; loopnum1++)
 		for(int loopnum2 = 0; loopnum2 < 150; loopnum2++)
 			windows_snake_body[loopnum1][loopnum2] = false;
-	snake_speed = 400;
+	snake_speed = 200;
 	game_start = true;
 	windows_Console win_c;
 	win_c.Clr();
@@ -158,7 +159,7 @@ void game_system::game_start_function(){
 		}
 		
 		setting_snake_control = false;
-		Sleep(snake_speed);
+		Sleep(log(snake_speed)+snake_speed);
 	}
 	
 	char str1[] = "    GAME OVER!!    ";
@@ -205,7 +206,7 @@ void game_system::game_eat_cookie(){
 		windows_snake_body[cookie[loopnum1][0]][cookie[loopnum1][1]] = true;
 	}
 	snake_lenght+=2;
-	if(snake_speed >=40)
+	if(snake_speed >=30)
 		snake_speed-=10;
 	game_create_cookie();
 } 
