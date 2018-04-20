@@ -9,12 +9,17 @@ private:
 	bool game_test;
 	bool game_over;
 	bool setting_snake_control;
-	bool windows_snake_body[150][150];
-	int snake_data[100][2];
+	bool windows_snake_body[150][50];
+	int snake_data[3080][2];
 	int snake_lenght;
 	int snake_control;
 	int snake_set_top;
 	int snake_set_left;
+	int snake_speed;
+	int cookie[2][2];
+	
+	void game_create_cookie();
+	void game_eat_cookie();
 protected:
 	
 public:

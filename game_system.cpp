@@ -3,6 +3,7 @@
 #include "set_cursor.h"
 #include "UI.h"
 #include <stdio.h>
+#include <time.h>
 
 int game_system::getsnake_control(){
 	return snake_control;
@@ -86,6 +87,7 @@ void game_system::game_start_function(){
 	for(int loopnum1 = 0; loopnum1 < 150; loopnum1++)
 		for(int loopnum2 = 0; loopnum2 < 150; loopnum2++)
 			windows_snake_body[loopnum1][loopnum2] = false;
+	snake_speed = 400;
 	game_start = true;
 	windows_Console win_c;
 	win_c.Clr();
@@ -104,6 +106,8 @@ void game_system::game_start_function(){
 		windows_snake_body[snake_data[loopnum1][0]][snake_data[loopnum1][1]] = true;
 	}
 	
+	game_create_cookie();
+	
 	//開始遊戲區域 
 	while(1){
 		setting_snake_control = true;
@@ -111,15 +115,23 @@ void game_system::game_start_function(){
 		if(snake_control == 1){
 			if(snake_data[0][1] == game_form_top || windows_snake_body[snake_data[0][0]][snake_data[0][1]-1])
 				break;
+			else if(snake_data[0][1]-1 == cookie[0][1] && snake_data[0][0] == cookie[0][0])
+				game_eat_cookie(); 
 		}else if(snake_control == 2){
 			if(snake_data[0][1] == game_form_top+game_form_height-1 || windows_snake_body[snake_data[0][0]][snake_data[0][1]+1])
 				break;
+			else if(snake_data[0][1]+1 == cookie[0][1] && snake_data[0][0] == cookie[0][0])
+				game_eat_cookie();
 		}else if(snake_control == 3){
 			if(snake_data[0][0] == game_form_left || windows_snake_body[snake_data[0][0]-1][snake_data[0][1]])
 				break;
+			else if(snake_data[0][0]-1 == cookie[1][0] && snake_data[0][1] == cookie[0][1])
+				game_eat_cookie();
 		}else if(snake_control == 4){
 			if(snake_data[1][0] == game_form_left+game_form_width-1 || windows_snake_body[snake_data[1][0]+1][snake_data[1][1]])
 				break;
+			else if(snake_data[1][0]+1 == cookie[0][0] && snake_data[0][1] == cookie[0][1])
+				game_eat_cookie();
 		}
 	
 		sc.gotoxy(snake_data[snake_lenght-2][0],snake_data[snake_lenght-2][1]);
@@ -146,7 +158,7 @@ void game_system::game_start_function(){
 		}
 		
 		setting_snake_control = false;
-		Sleep(500);
+		Sleep(snake_speed);
 	}
 	
 	char str1[] = "    GAME OVER!!    ";
@@ -169,3 +181,31 @@ void game_system::game_start_function(){
 	
 	game_start = false;
 }
+
+void game_system::game_create_cookie(){
+	do{
+		srand((unsigned)time(NULL));
+	    cookie[0][0] = game_form_left+rand()%(game_form_width-1);
+	    if(cookie[0][0] % 2 == 0)
+	    	cookie[0][0]-=1;	
+	    cookie[0][1] = game_form_top+rand()%(game_form_height-1);
+	}while(windows_snake_body[cookie[0][0]][cookie[0][1]]);
+	cookie[1][0] = cookie[0][0] + 1;
+	cookie[1][1] = cookie[0][1];
+	
+	set_cursor sc;
+	sc.gotoxy(cookie[0][0],cookie[0][1]);
+	printf("◎");
+}
+
+void game_system::game_eat_cookie(){
+	for(int loopnum1 = 0; loopnum1 < 2;loopnum1++){
+		snake_data[snake_lenght+loopnum1][0] = snake_data[snake_lenght-2+loopnum1][0];
+		snake_data[snake_lenght+loopnum1][1] = snake_data[snake_lenght-2+loopnum1][1];
+		windows_snake_body[cookie[loopnum1][0]][cookie[loopnum1][1]] = true;
+	}
+	snake_lenght+=2;
+	if(snake_speed >=40)
+		snake_speed-=10;
+	game_create_cookie();
+} 
