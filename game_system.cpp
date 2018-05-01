@@ -11,8 +11,12 @@ int game_system::getsnake_control(){
 }
 
 void game_system::setsnake_control(int snake_control){
+	snake_control_buffer = snake_control;
+}
+
+void game_system::setsnake_control_next(){
 	setting_snake_control = true;
-	this->snake_control = snake_control;
+	snake_control = snake_control_buffer;
 	snake_set_top = 0;
 	snake_set_left = 0;
 	switch(snake_control){
@@ -112,6 +116,8 @@ void game_system::game_start_function(){
 	//開始遊戲區域 
 	while(1){
 		setting_snake_control = true;
+		setsnake_control_next();
+		setting_snake_control = false;
 		
 		if(snake_control == 1){
 			if(snake_data[0][1] == game_form_top || windows_snake_body[snake_data[0][0]][snake_data[0][1]-1])
@@ -158,7 +164,6 @@ void game_system::game_start_function(){
 			windows_snake_body[snake_data[loopnum3][0]][snake_data[loopnum3][1]] = true;
 		}
 		
-		setting_snake_control = false;
 		Sleep(log(snake_speed)+snake_speed);
 	}
 	
