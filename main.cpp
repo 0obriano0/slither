@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 	set_cursor sc;
 	windows_Console win_c;
 	
-	sc.SetCursorVisible(true,1); 
+	sc.SetCursorVisible(false,1); 
 	win_c._SetConsoleTitle(" ( ¡E£s¡E`)");
 	
 	UI UI;
