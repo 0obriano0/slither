@@ -21,6 +21,9 @@ int main(void)
      printf("ascii=%d\n",c1);
      printf("you input key is \"%c\"\n",c1); */
 	int c1, c2;
+	char ch[3];
+	scanf("%s",ch);
+	printf("ch[0] = %d,ch[1] = %d,ch = %s\n",ch[0],ch[1],ch);
 	while(1){
 		if (!kbhit())
 			c1= getch();
@@ -107,6 +110,7 @@ int main(void)
 			printf("\n");
 			printf("ascii is %d\n",c1);
 			printf("you press is %c\n",c1);
+			system("pause");
 		}
 	}
     system("PAUSE");
