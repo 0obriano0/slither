@@ -1,7 +1,8 @@
-#include <iostream>
 #include "UI.h"
 #include "set_cursor.h"
 #include "windows_Console.h"
+#include <stdio.h> 
+#include <iostream>
 
 void UI::SetColor(unsigned short ForeColor,unsigned short BackGroundColor){
 	HANDLE hCon=GetStdHandle(STD_OUTPUT_HANDLE);
