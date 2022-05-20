@@ -33,7 +33,7 @@ void reset_gamemenu(int *num){
 }
 
 int main(int argc, char** argv) {
-	
+	//無聊導入音樂@@ 
 	char music_buffer[255];
 	mciSendString(("open Jay_Jay.mp3 alias MUSIC"),music_buffer,sizeof(music_buffer),0);
 	mciSendString("play MUSIC repeat",NULL,0,0); 
@@ -51,6 +51,7 @@ int main(int argc, char** argv) {
 		UI.GameMenu();
 	}
 	
+	//提供遊戲系統視窗大小
 	game_system gs;
 	gs.game_system_seting(UI.form_width-2,UI.form_height-1,UI.form_top,UI.form_left);
 	
@@ -111,7 +112,7 @@ int main(int argc, char** argv) {
 					if(!gs.getgame_start() && !gs.getgame_test()){
 						if(gamemode == 1){
 							gs.setsnake_control(game_control_left);
-							_beginthread(get_start, 0,&gs);
+							_beginthread(get_start, 0,&gs);// process.h 使用此標頭檔的多執行續創建 
 							gamemode = 1;
 							mciSendString("stop MUSIC",NULL,0,0);
 						}else if(gamemode == 2){

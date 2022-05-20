@@ -85,6 +85,7 @@ void game_system::test(){
 
 void game_system::game_start_function(){
 	//遊戲設定 
+	//紀錄蛇的身體位置 
 	for(int loopnum1 = 0; loopnum1 < 150; loopnum1++)
 		for(int loopnum2 = 0; loopnum2 < 150; loopnum2++)
 			windows_snake_body[loopnum1][loopnum2] = false;
@@ -95,7 +96,7 @@ void game_system::game_start_function(){
 	UI UI;
 	UI.base();
 	set_cursor sc;
-	char snake[] = "          ";
+	char snake[] = "          ";//蛇的初始身體長度，以兩個空白為一個單位 
 	snake_lenght = strlen(snake);
 	sc.gotoxy(game_form_left+(game_form_width-snake_lenght)/2,game_form_top+(game_form_height-1)/2); //算出文字位子 等於 （螢幕長度-字串長度）/2
 	UI.SetColor(10,10);
@@ -162,6 +163,8 @@ void game_system::game_start_function(){
 		Sleep(log(snake_speed)+snake_speed);
 	}
 	
+	
+	//當遊戲結束時做的動作 
 	char str1[] = "    GAME OVER!!    ";
 	char str2[] = "    請按 任意鍵 來首頁    ";
 	int L1 = strlen(str1);
@@ -183,6 +186,7 @@ void game_system::game_start_function(){
 	game_start = false;
 }
 
+//產生餅乾 
 void game_system::game_create_cookie(){
 	do{
 		srand((unsigned)time(NULL));
@@ -199,6 +203,7 @@ void game_system::game_create_cookie(){
 	printf("◎");
 }
 
+//吃到餅乾後的動作 
 void game_system::game_eat_cookie(){
 	for(int loopnum1 = 0; loopnum1 < 2;loopnum1++){
 		snake_data[snake_lenght+loopnum1][0] = snake_data[snake_lenght-2+loopnum1][0];
