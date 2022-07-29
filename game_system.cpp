@@ -99,7 +99,7 @@ void game_system::game_start_function(){
 	char snake[] = "          ";//蛇的初始身體長度，以兩個空白為一個單位 
 	snake_lenght = strlen(snake);
 	sc.gotoxy(game_form_left+(game_form_width-snake_lenght)/2,game_form_top+(game_form_height-1)/2); //算出文字位子 等於 （螢幕長度-字串長度）/2
-	UI.SetColor(8,8);
+	UI.SetColor(9,9);
 	printf("%s",snake);
 	UI.SetColor(7,0);
 	for(int loopnum1 = 0; loopnum1 < snake_lenght; loopnum1++){
@@ -146,9 +146,9 @@ void game_system::game_start_function(){
 		}
 		
 		sc.gotoxy(snake_data[2][0]+2*snake_set_left,snake_data[2][1]+snake_set_top);
-		UI.SetColor(15,15);
+		UI.SetColor(1,1);
 		printf("  ");
-		UI.SetColor(8,8);
+		UI.SetColor(9,9);
 		sc.gotoxy(snake_data[2][0],snake_data[2][1]);
 		printf("  ");
 		UI.SetColor(7,0);
@@ -197,7 +197,7 @@ void game_system::game_create_cookie(){
 	}while(windows_snake_body[cookie[0][0]][cookie[0][1]]);
 	cookie[1][0] = cookie[0][0] + 1;
 	cookie[1][1] = cookie[0][1];
-	
+
 	set_cursor sc;
 	sc.gotoxy(cookie[0][0],cookie[0][1]);
 	printf("◎");
